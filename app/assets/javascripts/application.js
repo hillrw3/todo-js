@@ -14,6 +14,18 @@
 //= require jquery_ujs
 //= require_tree .
 
-$(document).ready(function() {
-  $('body').append("<h1>hello world, I'm from only javascript!</h1>");
+$(document).ready(function () {
+  var body = $('body')
+
+  var input = document.createElement('INPUT');
+  input.setAttribute('type', 'text');
+
+  var button = document.createElement('button');
+  button.setAttribute('type', 'submit');
+  button.innerHTML = 'Create Todo'
+
+  body.append("<h1>Todo.ly</h1>").addClass('centered-text');
+  body.append(input);
+  body.append('<br/>');
+  body.append(button);
 });

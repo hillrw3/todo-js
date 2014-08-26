@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+.centered-text {
+    text-align: center;
+}
+
+.wide-input {
+    width: 20vw;
+}
