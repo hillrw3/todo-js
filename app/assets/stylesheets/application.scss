@@ -14,10 +14,67 @@
  *= require_self
  */
 
+* {
+  font-family: Helvetica, Arial, Sans-Serif;
+  box-sizing: border-box;
+}
+
 .centered-text {
-    text-align: center;
+  text-align: center;
 }
 
 .wide-input {
-    width: 20vw;
+  width: 20vw;
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  border-radius: 0px;
+}
+
+ul {
+  list-style: none;
+  margin: auto;
+  padding: 0;
+
+  button {
+    float: right;
+    border: 0;
+    background: none;
+    font-size: 1em;
+    color: red;
+  }
+}
+
+.container {
+  width: 25vw;
+}
+
+.float-left {
+  text-align: left;
+}
+
+.flash {
+  background-color: #6aa84f;
+  color: white;
+  height: 20px;
+  margin: auto;
+  display: none;
+
+  * {
+    display: inline-block;
+    margin: 0;
+  }
+
+  button {
+    float: right;
+    border: 0;
+    background: none;
+    font-size: 1em;
+  }
+}
+
+.float-right {
+  float: right;
 }
