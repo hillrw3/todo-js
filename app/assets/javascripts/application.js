@@ -29,6 +29,10 @@ $(document).ready(function () {
   $(button).attr('id', 'create');
 
   var list = document.createElement('ul');
+  $(list).attr('id', 'list');
+  $(list).addClass('wide-input float-left')
+
+  var complete = document.createElement('ul');
 
   var flash = document.createElement('div');
   $(flash).addClass('flash wide-input');
@@ -49,23 +53,49 @@ $(document).ready(function () {
   body.append(flash);
   body.append('<br/>');
   body.append(list);
+  body.append("<h1>Complete!</h1>");
+  body.append(complete);
 
-  $('#create').on('click', function() {
-    var newTodo = "<li>" + $('input').val() +  x + "</li>";
-    $(list).append(newTodo).addClass('wide-input float-left');
+  $('#create').on('click', function () {
+    var todo = {todo: $('input[type=text]').val()};
+    $.ajax({
+      type: "POST",
+      url: '/home',
+      dataType: 'json',
+      data: todo,
+      success: function() {
+        $('#list').append("<li><span>" + todo.todo + "</span>" + x + "</li>");
+      }
+    });
+    drawTable();
     $('input').val('');
     $(flash).show();
     setTimeout("$('.flash').fadeOut();", 5000);
+//    drawTable();
   });
 
-  $('.flash button').on('click', function(){
+  $('.flash button').on('click', function () {
     $('.flash').hide();
   });
 
-  $('li button').on('click', function() {
-    $(parent).remove();
-    alert("you clicked the damn button!");
-  });
+var drawTable = function() {
+  var promiseOfResult = $.getJSON("/home");
+  var todoListTodoItem = function (todos) {
+    var item = "<li><span>" + todos.todo + "</span>" + x + "</li>";
 
+    return item;
+  };
+
+  var whatToDoWhenItSucceeds = function (jsonResponse) {
+    var todoItems = jsonResponse.map(todoListTodoItem);
+    $('#list').html(todoItems);
+    $('li button').on('click', function () {
+      $(this).parent().remove();
+    });
+  };
+
+  promiseOfResult.success(whatToDoWhenItSucceeds);
+};
+  drawTable();
 
 });
